@@ -91,7 +91,8 @@ global.fetch = require("cross-fetch");
                                 {                                                          
                                     primary.includes(item.color) ? isPrimary = true : isPrimary = false;
                                     item.isPrimary = isPrimary;
-                                    closedPrimaryCount++;
+                                    if(isPrimary)
+                                        closedPrimaryCount++;
                                 }
                                 
                         });
@@ -103,13 +104,18 @@ global.fetch = require("cross-fetch");
                         "closedPrimaryCount": closedPrimaryCount,
                         "previousPage": prevPage,
                         "nextPage": nextPage
-                    }
-                    //console.log(payload);
-                
+                    }                
                     return resolve(payload);
                     }
                 else if(pages.length == 0){
-
+                    let payload = {
+                        "ids": [],
+                        "open": [],
+                        "closedPrimaryCount": 0,
+                        "previousPage": null,
+                        "nextPage": null
+                    }                
+                    return resolve(payload);
                 }
                 
               
