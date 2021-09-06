@@ -31,4 +31,12 @@ retrieve({page:1}).then(r => {
 retrieve({page:34}).then(r => {
     console.log(r);
 });
+
+retrieve({page: 15, colors: ["red", "blue", "brown"]}).then(r => {
+    console.log(r);
+});
+retrieve({page:50}).then(r => {
+    console.log(r);
+});
+
 //module.exports = {retrieve}

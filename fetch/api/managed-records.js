@@ -129,16 +129,19 @@ global.fetch = require("cross-fetch");
 
 function geturl(url,page=0,colors=[]) {
     var offset = 0;
-    limit = page*10-10;
+   // if(page > 0)
+   //     limit = page*10-10;
+    
 
-    if(parseInt(limit) > 0 || parseInt(offset) > 0 || colors.length > 0){
+    if(parseInt(offset) >= 0 || colors.length > 0){
         url = url + '?';
     }
-   // if(parseInt(limit) > 0){
-  //      url = url + 'limit=' + limit.toString();
+  //  if(colors.length == 0){
+        limit = 500;
+        url = url + 'limit=' + limit.toString();
   //  }
 
-    url = url + '&offset=' + offset.toString();
+    url = url + 'offset=' + offset.toString();
 
     if(colors.length > 0){
         for(var i=0;i<colors.length;i++){
