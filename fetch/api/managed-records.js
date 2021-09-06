@@ -80,13 +80,20 @@ global.fetch = require("cross-fetch");
                     if(typeof(currentPage) != "undefined"){
                         currentPage.map((item,index) => {
                             var isPrimary = false;
+                            if(!ids.includes(item.id))
+                                ids.push(item.id);
                             if(item.disposition == "open"){                        
                                 primary.includes(item.color) ? isPrimary = true : isPrimary = false;
                                 item.isPrimary = isPrimary;
                                 open.push(item);
                             }
                             if(item.disposition == "closed")
-                                closedPrimaryCount++;
+                                {                                                          
+                                    primary.includes(item.color) ? isPrimary = true : isPrimary = false;
+                                    item.isPrimary = isPrimary;
+                                    closedPrimaryCount++;
+                                }
+                                
                         });
                     }
                 
@@ -121,9 +128,9 @@ function geturl(url,page=0,colors=[]) {
     if(parseInt(limit) > 0 || parseInt(offset) > 0 || colors.length > 0){
         url = url + '?';
     }
-    if(parseInt(limit) > 0){
-        url = url + 'limit=' + limit.toString();
-    }
+   // if(parseInt(limit) > 0){
+  //      url = url + 'limit=' + limit.toString();
+  //  }
 
     url = url + '&offset=' + offset.toString();
 

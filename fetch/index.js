@@ -7,7 +7,7 @@ retrieve({page:1,colors:['brown','green']}).then(r => {
     console.log(r);
 });
 
-retrieve({page:12,colors:['brown','green','blue']}).then(r => {
+retrieve({page:10,colors:['brown','green','blue']}).then(r => {
     console.log(r);
 });
 
