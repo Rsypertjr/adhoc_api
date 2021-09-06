@@ -38,7 +38,7 @@ describe("Records", function() {
       }).then(done);
     });
     it('last page', function(done){
-      var expected = {"previousPage":44,"nextPage":null,"ids":[495,496,497,498,499,500],"open":[{"id":495,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":6};
+      var expected = {"previousPage":44,"nextPage":null,"ids":[495,496,497,498,499,500],"open":[{"id":495,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":5};
       retrieve({page: 45}).then(function(output){
         expect(output).toEqual(expected);
       }).then(done);
@@ -74,22 +74,22 @@ describe("Records", function() {
   });
 
   it('should recover on fetch error', function(done){
-    window.path = "http://localhost:3000/recordszzz";
-    spyOn(console, "log").and.callFake(function(){});
+    var furl = "http://localhost:3000/recordszzz";
+    spyOn(console, "error").and.callFake(function(){});
 
     function check(output) {
-      window.path = "http://localhost:3000/records";
+      //let url = "http://localhost:3000/records";
       expect(console.log).toHaveBeenCalled();
       console.log.calls.reset();
       retrieve().then(function(output){
         var expected = {"previousPage":null,"nextPage":2,"ids":[1,2,3,4,5,6,7,8,9,10],"open":[{"id":2,"color":"yellow","disposition":"open","isPrimary":true},{"id":4,"color":"brown","disposition":"open","isPrimary":false},{"id":6,"color":"blue","disposition":"open","isPrimary":true},{"id":8,"color":"green","disposition":"open","isPrimary":false},{"id":10,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":1};
         expect(output).toEqual(expected);
-        expect(console.log).not.toHaveBeenCalled();
+        expect(console.error).not.toHaveBeenCalled();
         done();
       });
     }
 
-    retrieve().then(check);
+    retrieve({url:furl}).then(check);
   });
 
 });

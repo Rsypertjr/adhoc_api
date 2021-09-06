@@ -442,7 +442,7 @@ var data = [
   { id: 492, color: "green", disposition: "closed" },
   { id: 493, color: "green", disposition: "closed" },
   { id: 494, color: "green", disposition: "closed" },
-  { id: 495, color: "red", disposition: "closed" },
+  { id: 495, color: "red", disposition: "open" },
   { id: 496, color: "red", disposition: "closed" },
   { id: 497, color: "yellow", disposition: "closed" },
   { id: 498, color: "yellow", disposition: "closed" },

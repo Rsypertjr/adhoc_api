@@ -2,6 +2,12 @@ global.fetch = require("cross-fetch");
 
      function retrieve(options){    
         var url = "http://localhost:3000/records";
+        
+        if(typeof(options) != "undefined" && typeof(options.url) == "undefined")
+            var url = "http://localhost:3000/records";
+        else if(typeof(options) != "undefined"  && typeof(options.url) != "undefined")
+            var url = options.url;
+        
         var page = 0;
         if(typeof(options) != "undefined"){    
             typeof(options.page) != "undefined" ? page = options.page : page=1;
@@ -54,12 +60,12 @@ global.fetch = require("cross-fetch");
                 });
                 console.log("Pages",pages);
                 console.log("Page No",page);
-                if(pages.length > 0 && page <= pages.length){ 
+                if(pages.length > 0 && page <= pages.length+1){ 
 
                     if(page == 1)
-                    currentPage = pages[0];
+                        currentPage = pages[0];
                     else
-                    currentPage = pages[page-1];
+                        currentPage = pages[page-1];
 
                     console.log("CurrentPage: ",currentPage);
                     if(typeof(pages[page-2]) != "undefined" && pages[page-2].length > 0)
@@ -99,11 +105,17 @@ global.fetch = require("cross-fetch");
                     return resolve(payload);
                 }
                 else if(pages.length == 0 || page > pages.length){
+                    var pageval = null;
+                    if(pages.length == 0)
+                        pageval = null;
+                    else if(pages.length != o && page > 1)
+                        pageval = page - 1;
+
                     let payload = {
                         "ids": [],
                         "open": [],
                         "closedPrimaryCount": 0,
-                        "previousPage": page-1,
+                        "previousPage": pageval,
                         "nextPage": null
                     }                
                     return resolve(payload);
