@@ -1,6 +1,4 @@
 global.fetch = require("cross-fetch");
-//import fetch from 'cross-fetch';
-
 
      function retrieve(options){    
         var url = "http://localhost:3000/records";
@@ -38,19 +36,8 @@ global.fetch = require("cross-fetch");
                
                 
                 data.map((item,index) => {
-                    //var isPrimary = false;
                     if(index == 0)
                         pages[pageno] = [];
-                 /*  if(!ids.includes(item.id))
-                        ids.push(item.id);
-                   if(item.disposition == "open"){                        
-                        primary.includes(item.color) ? isPrimary = true : isPrimary = false;
-                        item.isPrimary = isPrimary;
-                        open.push(item);
-                    }
-                    if(item.disposition == "closed")
-                        closedPrimaryCount++;
-                        */
                     
                     if(index % 10 != 0 || index == 0){
                         pages[pageno].push(item);
@@ -107,7 +94,7 @@ global.fetch = require("cross-fetch");
                     }                
                     return resolve(payload);
                     }
-                else if(pages.length == 0){
+                else if(pages.length == 0 || page > pages){
                     let payload = {
                         "ids": [],
                         "open": [],
@@ -128,19 +115,16 @@ global.fetch = require("cross-fetch");
 }
 
 function geturl(url,page=0,colors=[]) {
-    var offset = 0;
-   // if(page > 0)
-   //     limit = page*10-10;
+    var offset = 10;
+    if(page > 0)
+       limit = page*10+20;
     
 
     if(parseInt(offset) >= 0 || colors.length > 0){
         url = url + '?';
     }
-  //  if(colors.length == 0){
-        limit = 500;
-        url = url + 'limit=' + limit.toString();
-  //  }
-
+  
+    url = url + 'limit=' + limit.toString();
     url = url + 'offset=' + offset.toString();
 
     if(colors.length > 0){
@@ -151,7 +135,5 @@ function geturl(url,page=0,colors=[]) {
     return url;
 
 }
-         
-// Your retrieve function plus any additional functions go here ...
+       
 module.exports = retrieve; 
-//export default retrieve;

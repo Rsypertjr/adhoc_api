@@ -25,8 +25,8 @@ describe("Records", function() {
         expect(output).toEqual(expected);
       }).then(done);
     });
-    it('fifteenth page with colors', function(done){
-      var expected = {"previousPage":14,"nextPage":16,"ids":[236,237,238,240,241,243,246,251,252,256],"open":[{"id":240,"color":"blue","disposition":"open","isPrimary":true},{"id":241,"color":"red","disposition":"open","isPrimary":true},{"id":243,"color":"blue","disposition":"open","isPrimary":true},{"id":251,"color":"blue","disposition":"open","isPrimary":true},{"id":252,"color":"blue","disposition":"open","isPrimary":true},{"id":256,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":4};
+    it('twelth page with colors', function(done){
+      var expected = {"previousPage":11,"nextPage":13,"ids":[236,237,238,240,241,243,246,251,252,256],"open":[{"id":240,"color":"blue","disposition":"open","isPrimary":true},{"id":241,"color":"red","disposition":"open","isPrimary":true},{"id":243,"color":"blue","disposition":"open","isPrimary":true},{"id":251,"color":"blue","disposition":"open","isPrimary":true},{"id":252,"color":"blue","disposition":"open","isPrimary":true},{"id":256,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":4};
       retrieve({page: 15, colors: ["red", "blue", "brown"]}).then(function(output){
         expect(output).toEqual(expected);
       }).then(done);
