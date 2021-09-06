@@ -3,12 +3,16 @@ global.fetch = require("cross-fetch");
      function retrieve(options){    
         var url = "http://localhost:3000/records";
         var page = 0;
-        if(typeof(options.page) != "undefined")
-            page = options.page;
-        else
+        if(typeof(options) != "undefined"){    
+            typeof(options.page) != "undefined" ? page = options.page : page=1;
+            colors = options.colors;       
+        }
+        else if(typeof(options) == "undefined" || typeof(option.page) == "undefined"){
             page = 1;
+            colors = [];
+        }
+           
 
-        colors = options.colors;
        
         url = geturl(url,page,colors);
         console.log("URL: " + url);
@@ -93,13 +97,13 @@ global.fetch = require("cross-fetch");
                         "nextPage": nextPage
                     }                
                     return resolve(payload);
-                    }
-                else if(pages.length == 0 || page > pages){
+                }
+                else if(pages.length == 0 || page > pages.length){
                     let payload = {
                         "ids": [],
                         "open": [],
                         "closedPrimaryCount": 0,
-                        "previousPage": null,
+                        "previousPage": page-1,
                         "nextPage": null
                     }                
                     return resolve(payload);

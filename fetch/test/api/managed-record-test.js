@@ -26,28 +26,28 @@ describe("Records", function() {
       }).then(done);
     });
     it('twelth page with colors', function(done){
-      var expected = {"previousPage":11,"nextPage":13,"ids":[236,237,238,240,241,243,246,251,252,256],"open":[{"id":240,"color":"blue","disposition":"open","isPrimary":true},{"id":241,"color":"red","disposition":"open","isPrimary":true},{"id":243,"color":"blue","disposition":"open","isPrimary":true},{"id":251,"color":"blue","disposition":"open","isPrimary":true},{"id":252,"color":"blue","disposition":"open","isPrimary":true},{"id":256,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":4};
-      retrieve({page: 15, colors: ["red", "blue", "brown"]}).then(function(output){
+      var expected = {"previousPage":11,"nextPage":13,"ids":[213, 214, 215, 222, 224, 227, 228, 230, 232, 235],"open":[{id: 213, color: 'blue', disposition: 'open', isPrimary: true},{id: 215, color: 'red', disposition: 'open', isPrimary: true},{id: 227, color: 'red', disposition: 'open', isPrimary: true},{id: 228, color: 'blue', disposition: 'open', isPrimary: true},{id: 232, color: 'blue', disposition: 'open', isPrimary: true},{id: 235, color: 'brown', disposition: 'open', isPrimary: false}],"closedPrimaryCount":4};
+      retrieve({page: 12, colors: ["red", "blue", "brown"]}).then(function(output){
         expect(output).toEqual(expected);
       }).then(done);
     });
-    it('thirty fourth page', function(done){
-      var expected = {"previousPage":33,"nextPage":35,"ids":[331,332,333,334,335,336,337,338,339,340],"open":[{"id":332,"color":"brown","disposition":"open","isPrimary":false},{"id":334,"color":"green","disposition":"open","isPrimary":false},{"id":336,"color":"blue","disposition":"open","isPrimary":true},{"id":337,"color":"green","disposition":"open","isPrimary":false},{"id":339,"color":"green","disposition":"open","isPrimary":false},{"id":340,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":2};
-      retrieve({page: 34}).then(function(output){
+    it('thirtieth page', function(done){
+      var expected = {"previousPage":29,"nextPage":31,"ids":[333,334,338,339,340,341,342,343,344,345],"open":[{id: 334, color: 'green', disposition: 'open', isPrimary: false},{id: 339, color: 'green', disposition: 'open', isPrimary: false},{id: 340, color: 'red', disposition: 'open', isPrimary: true},{id: 341, color: 'yellow', disposition: 'open', isPrimary: true},{id: 343, color: 'red', disposition: 'open', isPrimary: true},{id: 344, color: 'brown', disposition: 'open', isPrimary: false},{id: 345, color: 'blue', disposition: 'open', isPrimary: true}],"closedPrimaryCount":1};
+      retrieve({page: 30}).then(function(output){
         expect(output).toEqual(expected);
       }).then(done);
     });
     it('last page', function(done){
-      var expected = {"previousPage":49,"nextPage":null,"ids":[491,492,493,494,495,496,497,498,499,500],"open":[{"id":491,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":6};
-      retrieve({page: 50}).then(function(output){
+      var expected = {"previousPage":44,"nextPage":null,"ids":[495,496,497,498,499,500],"open":[{"id":495,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":6};
+      retrieve({page: 45}).then(function(output){
         expect(output).toEqual(expected);
       }).then(done);
     });
   });
 
   it('should return an empty set of results for pages after the last page', function(done){
-    var expected = {"previousPage":50,"nextPage":null,"ids":[],"open":[],"closedPrimaryCount":0};
-    retrieve({page: 51}).then(function(output){
+    var expected = {"previousPage":45,"nextPage":null,"ids":[],"open":[],"closedPrimaryCount":0};
+    retrieve({page: 46}).then(function(output){
       expect(output).toEqual(expected);
     }).then(done);
   });
