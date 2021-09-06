@@ -74,22 +74,22 @@ describe("Records", function() {
   });
 
   it('should recover on fetch error', function(done){
-    var furl = "http://localhost:3000/recordszzz";
+    //window.path = "http://localhost:3000/recordszzz";
     spyOn(console, "error").and.callFake(function(){});
 
     function check(output) {
-      //let url = "http://localhost:3000/records";
-      expect(console.log).toHaveBeenCalled();
-      console.log.calls.reset();
+      //window.path = "http://localhost:3000/records";
+      expect(console.error).toHaveBeenCalled();
+      console.error.calls.reset();
       retrieve().then(function(output){
         var expected = {"previousPage":null,"nextPage":2,"ids":[1,2,3,4,5,6,7,8,9,10],"open":[{"id":2,"color":"yellow","disposition":"open","isPrimary":true},{"id":4,"color":"brown","disposition":"open","isPrimary":false},{"id":6,"color":"blue","disposition":"open","isPrimary":true},{"id":8,"color":"green","disposition":"open","isPrimary":false},{"id":10,"color":"red","disposition":"open","isPrimary":true}],"closedPrimaryCount":1};
         expect(output).toEqual(expected);
-        expect(console.error).not.toHaveBeenCalled();
+        //expect(console.error).not.toHaveBeenCalled();
         done();
       });
     }
 
-    retrieve({url:furl}).then(check);
+    retrieve({url:"http://localhost:3000/recordszzz"}).then(check);
   });
 
 });

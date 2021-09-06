@@ -27,7 +27,9 @@ global.fetch = require("cross-fetch");
             .then(response => {
 
                 if (response.status >= 400) {
-                    throw new Error("Bad response from server");
+                    console.error("Bad response from server");
+                    return resolve(new Error("Bad response from server"));
+                    //throw new Error("Bad response from server");
                 };
                 return response.json();
             }) 
@@ -141,7 +143,7 @@ function geturl(url,page=0,colors=[]) {
     }
   
     url = url + 'limit=' + limit.toString();
-    url = url + 'offset=' + offset.toString();
+    //url = url + 'offset=' + offset.toString();
 
     if(colors.length > 0){
         for(var i=0;i<colors.length;i++){
